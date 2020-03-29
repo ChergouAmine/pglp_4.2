@@ -11,6 +11,9 @@ public class Undo implements Interpreteur {
         throw new ErreurException();
     }
     
+    public void operation(char c) throws ErreurException {
+      throw new ErreurException();
+    }
     
     public String execute(String s) throws SaisieVideException {
         return calcul.annuler(s);

@@ -6,6 +6,10 @@ public class AjoutOperande implements Interpreteur{
   public  AjoutOperande(Calcul c) {
       calcul = c;
   }
+  
+  public void operation(char c) throws ErreurException {
+    throw new ErreurException();
+  }
 
   public void operandes(double d) throws PilePleineException {
       calcul.ajoutOperande(d);

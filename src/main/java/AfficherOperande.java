@@ -5,7 +5,11 @@ public class AfficherOperande implements Interpreteur{
   public AfficherOperande(Calcul c) {
       calcul = c;
   }
-
+  
+  public void operation(char c) throws ErreurException {
+    throw new ErreurException();
+  }
+  
   public void execute() throws PileVideException {
       calcul.afficherOperande();
       
