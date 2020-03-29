@@ -5,32 +5,49 @@ public class Calcul {
   
   //public static final int TAILLEMAX = 10;
   public ArrayList<Double> operande ;
-  
+  /**
+   * constructeur
+   */
   
   public Calcul () {
       operande = new ArrayList<Double>();
   }
   
-  public String annuler(String chaine)throws SaisieVideException {
+  
+
+  /**
+   * undo la dernière action
+   * @param c ce qu'a saisie l'user
+   * @return new chaine
+   */
+  
+  public String annuler(String c)throws SaisieVideException {
     
-       if(chaine.equals("")) throw new SaisieVideException();
+       if(c.equals("")) throw new SaisieVideException();
        
        String s = "";
       
-       for(int i = 0; i < chaine.length()-2; i++ )
-           s += chaine.charAt(i);
+       for(int i = 0; i < c.length()-2; i++ )
+           s += c.charAt(i);
        
        
        return s;
   }
   
- 
+  /**
+   * empiler un nombre
+   * @param d : nombre à empiler
+   */
   
   public void ajoutOperande(double d) throws PilePleineException {
     
         operande.add((Double) d);
-        System.out.println(d);
+        //System.out.println(d);
   }
+  
+  /**
+   * supprimer le nombre element de la pile.
+   */
   
   public void suppOperande() throws PileVideException{
       if (operande.size() == 0) throw new PileVideException();
@@ -41,12 +58,24 @@ public class Calcul {
      
   }
   
+
+  /**
+   * check si l'opération est + ou - ou / ou *.
+   * @param symbol charactère à vérifier 
+   * @return renvoie la réponse
+   */
+  
   public boolean operationBinaire(char symbol) {
       if(operande.size()-2<0|| (symbol != '+' && symbol != '-' && symbol != '/' && symbol != '*'))
           return false;
       else
         return true; 
   }
+  
+  /**
+   * effectue l'operation.
+   * @param symbol operation à appliquer 
+   */
   
   public void appliquerOperation(char symbol) throws DivByZeroException, PileVideException, PilePleineException {
       if(operationBinaire(symbol)) {
@@ -71,6 +100,12 @@ public class Calcul {
       }
   }
   
+
+  /**
+   * retourne la liste des opérandes
+   * @return liste de retour
+   */
+  
   public ArrayList<Double> ListeOperande() throws PileVideException {
       ArrayList<Double> l = new ArrayList<Double>();      
       
@@ -85,6 +120,10 @@ public class Calcul {
       return l;
   }
   
+  /**
+   * afficher la pile d'operande
+   */
+  
   public void afficherOperande() throws PileVideException{
     
       ArrayList<Double> l = this.ListeOperande();
@@ -97,6 +136,11 @@ public class Calcul {
       
       System.out.println(s+".");
   }
+  
+  /**
+   * nombre d'operandes
+   * @return retourner le nombre d'opérandes 
+   */
   
   public int getNbOperande() throws PileVideException {
       if(operande.isEmpty()) throw new PileVideException();
