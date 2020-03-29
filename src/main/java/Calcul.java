@@ -3,12 +3,12 @@ import java.util.ArrayList;
 public class Calcul {
       
   
-  private static final int TAILLEMAX = 10;
-  private ArrayList<Double> operande ;
+  //public static final int TAILLEMAX = 10;
+  public ArrayList<Double> operande ;
   
   
-  public Calcul ( ArrayList<Double> op) {
-      operande = op;
+  public Calcul () {
+      operande = new ArrayList<Double>();
   }
   
   public String annuler(String chaine)throws SaisieVideException {
@@ -26,11 +26,10 @@ public class Calcul {
   
  
   
-  public <T> void ajoutOperande(T d) throws PilePleineException {
-      if (operande.size() == TAILLEMAX) 
-        throw new PilePleineException();
-      else
+  public void ajoutOperande(double d) throws PilePleineException {
+    
         operande.add((Double) d);
+        System.out.println(d);
   }
   
   public void suppOperande() throws PileVideException{

@@ -12,8 +12,7 @@ public class AjoutOperande implements Interpreteur{
   }
 
   public void operandes(double d) throws PilePleineException {
-      calcul.ajoutOperande(d);
-      
+      calcul.ajoutOperande(d);      
   }
 
   public void execute() throws ErreurException {

@@ -7,26 +7,26 @@ public class MoteurRPN {
     
    
     public MoteurRPN() {
-      calcul = new Calcul(operande);
+      calcul = new Calcul();
       commande = new Commande();
       operande = new ArrayList<Double>();   
     }
     
     
-    public void associateNameCmd() {
+    public void associer() {
         Interpreteur retour = new Undo(calcul);
         Interpreteur quit = new Quit(calcul);
         Interpreteur ajouterOperande = new AjoutOperande(calcul);
         Interpreteur afficherOperande = new AfficherOperande(calcul);
         Interpreteur nbOperande = new GetNbOperandes(calcul);
-        Interpreteur applyOperation = (Interpreteur) new OperationBinaire(calcul);
+        Interpreteur applyOperation = new OperationBinaire(calcul);
         
         
         commande.register("undo", retour);
         commande.register("quit", quit);
         commande.register("add", ajouterOperande);
         commande.register("afficher", afficherOperande);
-        commande.register("get_size_list_operande", nbOperande);
+        commande.register("operande", nbOperande);
         commande.register("op", applyOperation);
 
     }

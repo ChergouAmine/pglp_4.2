@@ -27,6 +27,7 @@ public class Commande {
         if (i == null) 
             throw new IllegalStateException("Je ne connais pas cette commande");
         
+        
         i.operation(c);
         
     }
