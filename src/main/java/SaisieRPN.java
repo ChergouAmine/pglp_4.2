@@ -1,87 +1,55 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * 
+ * @author chergou
+ * Classe permettant la saisie des opérandes et opérands
+ *
+ */
 public class SaisieRPN {
-    public Scanner sc; 
-    private String c; 
-    ArrayList<Character> operateur;
+    
+    Scanner sc;    
     MoteurRPN moteur;
-    
-    
-  
-    public SaisieRPN() {
-        super();
+    Switch sw;
+
+    public SaisieRPN() throws DivByZeroException, ManqueOperandeException {
+        
+        sc = new Scanner(System.in);      
+        sw = new Switch();        
         moteur = new MoteurRPN();
-        moteur.associer();
-        operateur = new ArrayList<Character>();
-    }
-    
-    
-    public void Saisie() throws PileVideException, SaisieVideException, ErreurException {
-        sc = new Scanner(System.in);
-        String saisie = "";
-        c = "";
-        System.out.print("Entrez chaque opération individuellement en appuyant sur entrée à chaque opération \n\n 'undo' pour annuler la dernière saisie et 'quit' pour arrêter le programme. ");
         
-        do {
-             saisie = sc.nextLine();
-             
-             if(saisie.equals("undo"))
-                 c = moteur.commande.execute("undo", c);
-             
-             else if(!saisie.equals("quit")) 
-                 c = c+ " " + saisie; //il faut un espace entre 2 saisies
+        
+        sw.ajoutCommande("undo", new Undo(moteur));
+        sw.ajoutCommande("quit", new Quit(moteur));
+        sw.ajoutCommande("+", new Addition(moteur));
+        sw.ajoutCommande("-", new Soustraction(moteur));
+        sw.ajoutCommande("*", (Commande) new Multiplication(moteur));
+        sw.ajoutCommande("/", (Commande) new Division(moteur));
+        
+        while(true) {
             
-             System.out.println("état avant saisie : "+c);
-             System.out.println("état après saisie: "+c+" ");
-        }while(!saisie.equals("quit"));
-        
-        moteur.commande.execute("quit"); 
-    }
-    
-    
-    public String getChaine() {
-        return this.c;
-    }
-    
-   
-    public void empiler() throws ErreurSaisieException, PilePleineException, DivByZeroException, PileVideException, ErreurException {
-        
-      for(int i = 0; i < c.length(); i++) {
-        
-        if(c.charAt(i) == '+' || c.charAt(i) == '-' || c.charAt(i) == '/' || c.charAt(i) == '*'){
-          operateur.add(c.charAt(i));
-        }
-        else if(c.charAt(i) <= 47 && c.charAt(i) >= 58 && c.charAt(i) != ' ') {
-          throw new ErreurSaisieException();
-        }
-          else if((c.charAt(i) != '+') && (c.charAt(i) != '-') && (c.charAt(i) != '/') && (c.charAt(i) != '*') && (c.charAt(i) != ' ')) {
+            String line = sc.nextLine();
             
-            String s = "";
-            s +=c.charAt(i);
-            double d = Double.parseDouble(s);
-            moteur.commande.operande("add",d);
-            
-        }
-      }     
-    }
-    
- 
-    public void Calculer() throws PileVideException, PilePleineException, DivByZeroException, ErreurException {
-      
-      
-        if(operateur.size() != moteur.commande.getInteger("operande") - 1) {         
-            throw new ErreurException();
-        } 
-        else {
-         
-            int nbOperateur = operateur.size();
-           
-            for(int i = 0; i < nbOperateur; i++) {
-                moteur.commande.operation("op", operateur.get(0));
-                operateur.remove(0);
+            try {
+              
+                Double o = Double.parseDouble(line);
+                AjouterOperande a= new AjouterOperande(moteur, o);
+                
+                sw.ajoutCommande(line, a);
+                sw.verifCommande(line);//execute la commande
+                moteur.afficher();
             }
-            moteur.commande.execute("afficher");
+            catch(Exception e) {
+                if( sw.verifCommande(line)) {
+                    moteur.afficher();
+                }
+                else {
+                    System.out.println("Les seuls input acceptable sont: + , - , * , / , undo et quit");
+                }
+            }
+        
         }
-    }   
+        
+    }
+
 }

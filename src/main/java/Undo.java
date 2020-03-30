@@ -1,30 +1,32 @@
+import java.util.ArrayList;
 
-public class Undo implements Interpreteur {
-    private final Calcul calcul;
+/**
+ * 
+ * @author chergou
+ * Classe undo qui permet d'utilise la fonction undo de dl'interpreteur
+ *
+ */
+public class Undo implements Commande{
+    
+    
+    Interpreteur interpreteur;
+    
 
-    public Undo(Calcul c) {
-        calcul = c;
-    }
-
-   
-    public void execute()throws ErreurException {
-        throw new ErreurException();
-    }
-    
-    public void operation(char c) throws ErreurException {
-      throw new ErreurException();
-    }
-    
-    public String execute(String s) throws SaisieVideException {
-        return calcul.annuler(s);
-    }
-    
-    public void operandes(double d)throws ErreurException {
-        throw new ErreurException();
+    public Undo(Interpreteur i) { 
+      interpreteur = i;
     }
     
    
-    public int getInt()throws ErreurException {
-        throw new ErreurException();
+    
+    public void execute(ArrayList<Commande> pile) throws ManqueOperandeException, DivByZeroException {
+        interpreteur.undo(pile);
+    }
+
+
+
+    public void execute() {
+      // TODO Auto-generated method stub
+      
     } 
+    
 }

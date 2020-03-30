@@ -1,28 +1,21 @@
+/**
+ * 
+ * @author chergou
+ * Classe Quit qui permet d'utilise la fonction quit de dl'interpreteur
+ *
+ */
+public class Quit implements Commande{
 
-public class Quit implements Interpreteur{
-  private final Calcul calcul;
+    Interpreteur interpreteur;
+    
 
-  public Quit(Calcul c) {
-      calcul = c;
-  }
+    public Quit(Interpreteur i) {
+        interpreteur = i;
+    }
 
-  public void execute() {
-      calcul.arreter();
-  }
- 
-  public String execute(String s)throws ErreurException {
-      throw new ErreurException();
-  }
-   
-  public void operation(char c) throws ErreurException {
-    throw new ErreurException();
-  }
-  
-  public void operandes(double d) throws ErreurException {
-      throw new ErreurException();
-  }
-  
-  public int getInt() throws ErreurException {
-      throw new ErreurException();
-  }
+    
+    public void execute() {
+      interpreteur.quit();
+    }
+
 }
