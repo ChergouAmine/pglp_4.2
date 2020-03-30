@@ -19,12 +19,13 @@ public class SaisieRPN {
         moteur = new MoteurRPN();
         
         
-        sw.ajoutCommande("undo", new Undo(moteur));
-        sw.ajoutCommande("quit", new Quit(moteur));
+       
         sw.ajoutCommande("+", new Addition(moteur));
         sw.ajoutCommande("-", new Soustraction(moteur));
-        sw.ajoutCommande("*", (Commande) new Multiplication(moteur));
         sw.ajoutCommande("/", (Commande) new Division(moteur));
+        sw.ajoutCommande("*", (Commande) new Multiplication(moteur));
+        sw.ajoutCommande("undo", new Undo(moteur));
+        sw.ajoutCommande("quit", new Quit(moteur));
         
         while(true) {
             

@@ -275,7 +275,7 @@
         </module>
         <module name="NonEmptyAtclauseDescription"/>
         <module name="InvalidJavadocPosition"/>
-        <!--<module name="JavadocTagContinuationIndentation"/>
+        <module name="JavadocTagContinuationIndentation"/>
         <module name="SummaryJavadoc">
             <property name="forbiddenSummaryFragments"
              value="^@return the *|^This method returns |^A [{]@code [a-zA-Z0-9]+[}]( is a )"/>
@@ -285,7 +285,7 @@
             <property name="tagOrder" value="@param, @return, @throws, @deprecated"/>
             <property name="target"
              value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, METHOD_DEF, CTOR_DEF, VARIABLE_DEF"/>
-        </module>-->
+        </module>
         <module name="JavadocMethod">
             <property name="scope" value="public"/>
             <property name="allowMissingParamTags" value="true"/>

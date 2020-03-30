@@ -31,8 +31,6 @@ public class Switch {
     /**
      * @param nom : le nom de la commande (+,-,/,*)
      * cette classe vérifie si la commande existe ou pas et elle l'execute si elle existe
-     * @throws ManqueOperandeException 
-     * @throws DivByZeroException 
      */
     public boolean verifCommande(String nom) throws ManqueOperandeException, DivByZeroException {
       
